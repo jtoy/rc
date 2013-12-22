@@ -22,6 +22,12 @@ parse_git_branch_or_tag() {
 }
 
 
+if [ -f ~/.keys ]
+then
+  source ~/.keys
+fi
+
+
 PS1="\u@\h:\w\$(parse_git_branch_or_tag) $ "
 
 

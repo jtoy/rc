@@ -12,6 +12,15 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'vim-scripts/paredit.vim.git'
 Bundle 'Shougo/neocomplcache.vim.git'
+
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_auto_completion_start_length = 2
+let g:neocomplete#max_list = 15
+
+
 Bundle 'Lokaltog/vim-easymotion.git'
 Bundle 'scrooloose/nerdtree.git'
 
@@ -19,6 +28,7 @@ let g:NERDShutUp=1
 autocmd vimenter * NERDTree
 
 
+Bundle 'airblade/vim-gitgutter'
 
 Bundle 'myusuf3/numbers.vim.git'
 

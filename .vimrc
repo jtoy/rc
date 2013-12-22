@@ -13,6 +13,11 @@ Bundle 'tpope/vim-surround.git'
 Bundle 'vim-scripts/paredit.vim.git'
 Bundle 'Shougo/neocomplcache.vim.git'
 Bundle 'Lokaltog/vim-easymotion.git'
+Bundle 'scrooloose/nerdtree.git'
+
+let g:NERDShutUp=1
+autocmd vimenter * NERDTree
+
 
 
 Bundle 'myusuf3/numbers.vim.git'
@@ -22,7 +27,7 @@ set nu " Line numbers on
 Bundle 'tpope/vim-fugitive.git'
 
 
-
+Bundle 'dockyard/vim-easydir.git'
 
 Bundle 'guns/vim-clojure-static.git'
 let g:clojure_align_multiline_strings = 1

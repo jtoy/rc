@@ -1,4 +1,4 @@
-export PATH=$PATH:~/bin:/usr/local/pgsql/bin
+export PATH=$PATH:~/bin:/usr/local/pgsql/bin:/opt/local/bin/:/opt/local/sbin/
 export EDITOR=vim
 
 # reloads the prompt, usefull to take new modifications into account
@@ -27,8 +27,12 @@ then
   source ~/.keys
 fi
 
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 PS1="\u@\h:\w\$(parse_git_branch_or_tag) $ "
 
 
 [[ -s ~/.autojump/etc/profile.d/autojump.bash ]] && . ~/.autojump/etc/profile.d/autojump.bash
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

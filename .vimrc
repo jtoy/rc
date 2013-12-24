@@ -38,12 +38,16 @@ Bundle 'tpope/vim-fugitive.git'
 
 
 Bundle 'dockyard/vim-easydir.git'
+let g:EasyMotion_leader_key = ','
 
 Bundle 'guns/vim-clojure-static.git'
 let g:clojure_align_multiline_strings = 1
 
 Bundle 'tpope/vim-vividchalk.git'
 Bundle 'altercation/vim-colors-solarized.git'
+
+Bundle 'bling/vim-bufferline.git'
+
 
 syntax on
 syntax enable

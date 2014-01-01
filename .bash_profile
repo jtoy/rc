@@ -3,6 +3,8 @@ export EDITOR=vim
 
 # reloads the prompt, usefull to take new modifications into account
 alias reload="source ~/.bash_profile"
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 
 parse_git_branch () {

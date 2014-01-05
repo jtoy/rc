@@ -17,6 +17,7 @@ let g:acp_enableAtStartup = 0
 let g:neocomplcache_force_overwrite_completefunc = 1
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_temporary_dir = "$HOME/.vim/tmp/neocomplcache"
 let g:neocomplcache_auto_completion_start_length = 2
 let g:neocomplete#max_list = 15
 

@@ -1,10 +1,10 @@
+mkdir ~/bin
 cd downloads
 git clone git://github.com/joelthelion/autojump.git
 cd autojump
 
 
 
-mkdir ~/bin
 curl http://beyondgrep.com/ack-2.12-single-file > ~/bin/ack && chmod 0755 !#:3
 
 

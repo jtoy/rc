@@ -23,10 +23,6 @@ let g:neocomplete#max_list = 15
 
 
 Bundle 'Lokaltog/vim-easymotion.git'
-Bundle 'scrooloose/nerdtree.git'
-
-let g:NERDShutUp=1
-autocmd vimenter * NERDTree
 
 
 Bundle 'airblade/vim-gitgutter'

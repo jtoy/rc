@@ -28,6 +28,7 @@ Bundle 'Lokaltog/vim-easymotion.git'
 Bundle 'airblade/vim-gitgutter'
 
 Bundle 'myusuf3/numbers.vim.git'
+Bundle 'ahw/vim-pbcopy.git'
 
 set nu " Line numbers on
 

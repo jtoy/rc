@@ -21,7 +21,7 @@ let g:neocomplcache_temporary_dir = "$HOME/.vim/tmp/neocomplcache"
 let g:neocomplcache_auto_completion_start_length = 2
 let g:neocomplete#max_list = 15
 
-
+set clipboard=unnamed
 Bundle 'Lokaltog/vim-easymotion.git'
 
 

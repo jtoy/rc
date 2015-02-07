@@ -7,8 +7,6 @@ if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
 
-
-
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear"
 
 function parse_git_dirty {

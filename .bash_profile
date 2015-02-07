@@ -23,6 +23,13 @@ parse_git_branch_or_tag() {
   echo $OUT
 }
 
+function tabname {
+  printf "\e]1;$1\a"
+}
+
+function winname {
+  printf "\e]2;$1\a"
+}
 
 if [ -f ~/.keys ]
 then
@@ -40,3 +47,6 @@ PS1="\u@\h:\w\$(parse_git_branch_or_tag) $ "
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+

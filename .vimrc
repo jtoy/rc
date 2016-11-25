@@ -46,6 +46,7 @@ Bundle 'altercation/vim-colors-solarized.git'
 
 Bundle 'bling/vim-bufferline.git'
 
+au BufRead,BufNewFile *.pde     setf java
 
 syntax on
 syntax enable

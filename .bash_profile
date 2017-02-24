@@ -47,6 +47,14 @@ PS1="\u@\h:\w\$(parse_git_branch_or_tag) $ "
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+export BOOT_JVM_OPTIONS='
+  -client
+  -XX:+TieredCompilation
+  -XX:TieredStopAtLevel=1
+  -Xmx2g
+  -XX:+UseConcMarkSweepGC
+  -XX:+CMSClassUnloadingEnabled
+  -Xverify:none'
 source ~/.somaticenv
 eval "$(rbenv init -)"
 

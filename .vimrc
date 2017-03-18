@@ -12,7 +12,9 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'vim-scripts/paredit.vim.git'
 Bundle 'Shougo/neocomplcache.vim.git'
+Bundle 'luochen1990/rainbow'
 
+let g:rainbow_active = 1 
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_force_overwrite_completefunc = 1
 let g:neocomplcache_enable_at_startup = 1

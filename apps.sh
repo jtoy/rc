@@ -7,7 +7,7 @@ cd autojump
 
 
 
-curl http://beyondgrep.com/ack-2.12-single-file > ~/bin/ack && chmod 0755 !#:3
+curl http://beyondgrep.com/ack-2.18-single-file > ~/bin/ack && chmod 0755 ~/bin/ack
 
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle

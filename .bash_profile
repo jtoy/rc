@@ -60,3 +60,4 @@ export BOOT_JVM_OPTIONS='
 source ~/.somaticenv
 eval "$(rbenv init -)"
 
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"

@@ -6,6 +6,7 @@ alias reload="source ~/.bash_profile"
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
+FILE=~/.env && test -f $FILE && source $FILE
 
 parse_git_branch () {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'

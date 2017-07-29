@@ -3,6 +3,9 @@ filetype off                  " required!
 set fileencoding=utf-8
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
+
+
 
 " let Vundle manage Vundle
 " required! 

@@ -58,7 +58,14 @@ export BOOT_JVM_OPTIONS='
   -XX:+UseConcMarkSweepGC
   -XX:+CMSClassUnloadingEnabled
   -Xverify:none'
-source ~/.somaticenv
 eval "$(rbenv init -)"
 
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# added by Anaconda3 5.1.0 installer
+export PATH="/Users/jtoy/anaconda3/bin:~/bin:$PATH"
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+eval "$(rbenv init -)"
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+export PYENV_ROOT="$HOME/.pyenv"
+

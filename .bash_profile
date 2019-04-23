@@ -1,4 +1,6 @@
 export PATH=$PATH:~/bin:/usr/local/pgsql/bin:/opt/local/bin/:/opt/local/sbin/:~/sandbox/somatic/packer_0.8.6_darwin_amd64/
+export PATH="$PATH:~/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# Add Visual Studio Code (code)
 export EDITOR=vim
 
 # reloads the prompt, usefull to take new modifications into account

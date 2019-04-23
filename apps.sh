@@ -4,6 +4,8 @@ cd downloads
 git clone git://github.com/joelthelion/autojump.git
 cd autojump
 ./install.py
+npm install --global git-open
+
 
 
 

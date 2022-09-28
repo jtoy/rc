@@ -1,7 +1,7 @@
 mkdir ~/bin
 mkdir downloads
 cd downloads
-git clone git://github.com/joelthelion/autojump.git
+git clone git@github.com:wting/autojump.git
 cd autojump
 ./install.py
 npm install --global git-open

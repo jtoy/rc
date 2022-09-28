@@ -4,7 +4,8 @@ set fileencoding=utf-8
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
-
+set undofile
+set undodir=~/.vim/undo/
 
 
 " let Vundle manage Vundle

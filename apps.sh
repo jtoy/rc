@@ -13,3 +13,4 @@ curl http://beyondgrep.com/ack-2.18-single-file > ~/bin/ack && chmod 0755 ~/bin/
 
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +PluginInstall +qall

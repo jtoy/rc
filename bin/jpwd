@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+jpwd / jp - Print the best autojump match for the given search terms.
+
+Usage:
+    jpwd <term> [term2 ...]
+    jp <term> [term2 ...]
+
+Reads the autojump database and prints the highest-weight directory that
+matches all terms (same algorithm autojump uses: consecutive → fuzzy →
+anywhere).  Exits 1 if no match is found.
+"""
+
+import os
+import re
+import sys
+from collections import namedtuple
+from difflib import SequenceMatcher
+from itertools import chain
+from math import sqrt
+from operator import attrgetter
+
+# ---------------------------------------------------------------------------
+# Config / data paths (mirrors autojump's set_defaults() for macOS)
+# ---------------------------------------------------------------------------
+DATA_PATH = os.path.join(os.path.expanduser("~"), "Library", "autojump", "autojump.txt")
+
+Entry = namedtuple("Entry", ["path", "weight"])
+
+
+# ---------------------------------------------------------------------------
+# Load database
+# ---------------------------------------------------------------------------
+def load(data_path=DATA_PATH):
+    if not os.path.exists(data_path):
+        return {}
+    parse = lambda line: line.strip().split("\t")
+    correct_length = lambda x: len(x) == 2
+    tupleize = lambda x: (x[1], float(x[0]))
+    try:
+        with open(data_path, "r", encoding="utf-8", errors="replace") as f:
+            return dict(map(tupleize, filter(correct_length, map(parse, f))))
+    except (IOError, EOFError):
+        return {}
+
+
+def entriefy(data):
+    return (Entry(path, weight) for path, weight in data.items())
+
+
+# ---------------------------------------------------------------------------
+# Matching (mirrors autojump_match.py)
+# ---------------------------------------------------------------------------
+def _last(iterable):
+    item = None
+    for item in iterable:
+        pass
+    return item
+
+
+def match_consecutive(needles, haystack, ignore_case=False):
+    regex_no_sep = "[^" + os.sep + "]*"
+    regex_no_sep_end = regex_no_sep + "$"
+    regex_one_sep = regex_no_sep + os.sep + regex_no_sep
+    regex_needle = regex_one_sep.join(map(re.escape, needles)) + regex_no_sep_end
+    flags = re.IGNORECASE | re.UNICODE if ignore_case else re.UNICODE
+    found = lambda entry: re.search(regex_needle, entry.path, flags=flags)
+    return filter(found, haystack)
+
+
+def match_fuzzy(needles, haystack, ignore_case=False, threshold=0.6):
+    end_dir = lambda path: os.path.split(path)[-1]
+    needle = needles[-1].lower() if ignore_case else needles[-1]
+    def match_percent(entry):
+        target = end_dir(entry.path).lower() if ignore_case else end_dir(entry.path)
+        return SequenceMatcher(a=needle, b=target).ratio()
+    return filter(lambda entry: match_percent(entry) >= threshold, haystack)
+
+
+def match_anywhere(needles, haystack, ignore_case=False):
+    regex_needle = ".*" + ".*".join(map(re.escape, needles)) + ".*"
+    flags = re.IGNORECASE | re.UNICODE if ignore_case else re.UNICODE
+    found = lambda entry: re.search(regex_needle, entry.path, flags=flags)
+    return filter(found, haystack)
+
+
+def has_uppercase(s):
+    return any(c.isupper() for c in s)
+
+
+def detect_smartcase(needles):
+    return not any(map(has_uppercase, needles))
+
+
+def find_matches(entries, needles):
+    ignore_case = detect_smartcase(needles)
+    try:
+        pwd = os.getcwd()
+    except OSError:
+        pwd = None
+
+    is_cwd = lambda entry: os.path.realpath(entry.path) == pwd
+    path_exists = lambda entry: os.path.exists(entry.path)
+
+    data = sorted(entries, key=attrgetter("weight", "path"), reverse=True)
+
+    return filter(
+        lambda entry: not is_cwd(entry) and path_exists(entry),
+        chain(
+            match_consecutive(needles, data, ignore_case),
+            match_fuzzy(needles, data, ignore_case),
+            match_anywhere(needles, data, ignore_case),
+        ),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+def main():
+    args = sys.argv[1:]
+
+    if not args or args[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        sys.exit(0 if args and args[0] in ("-h", "--help") else 1)
+
+    # Check if the args form a path that exists relative to cwd
+    local_candidate = os.path.join(os.getcwd(), *args)
+    if os.path.exists(local_candidate):
+        print(os.path.realpath(local_candidate))
+        sys.exit(0)
+
+    needles = args
+
+    data = load()
+    if not data:
+        print("jpwd: autojump database not found or empty: {}".format(DATA_PATH), file=sys.stderr)
+        sys.exit(1)
+
+    entries = list(entriefy(data))
+    matches = find_matches(entries, needles)
+
+    result = next(iter(matches), None)
+    if result is None:
+        print("jpwd: no match found for: {}".format(" ".join(args)), file=sys.stderr)
+        sys.exit(1)
+
+    print(result.path)
+
+
+if __name__ == "__main__":
+    main()
